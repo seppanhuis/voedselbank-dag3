@@ -1,0 +1,14 @@
+DROP PROCEDURE IF EXISTS sp_GetAllPostcodes;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_GetAllPostcodes()
+BEGIN
+	SELECT DISTINCT
+		C.Postcode
+	FROM Contact C
+	WHERE C.IsActief = 1
+	ORDER BY C.Postcode ASC;
+END$$
+
+DELIMITER ;
