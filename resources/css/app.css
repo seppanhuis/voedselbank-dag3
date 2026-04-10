@@ -1,13 +1,13 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 body {
-    background-color: #e6e6e6;
+    background-color: #ffffff;
     font-family: Arial, sans-serif;
 }
 
 .wireframe-card {
     background: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .wireframe-card .table {

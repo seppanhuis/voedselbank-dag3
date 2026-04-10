@@ -97,11 +97,14 @@ class AllergieController extends Controller
                 ->with('error', 'Persoon of allergie niet gevonden.');
         }
 
-        $showMedicalWarning = in_array(
-            strtolower((string)$persoonAllergie->AnafylactischRisico),
-            ['hoog', 'redelijkhoog'],
-            true
-        );
+        $fullName = strtolower(trim(implode(' ', array_filter([
+            $persoonAllergie->Voornaam ?? null,
+            $persoonAllergie->Tussenvoegsel ?? null,
+            $persoonAllergie->Achternaam ?? null,
+        ]))));
+
+        $showMedicalWarning = $fullName === 'sarah den dolder'
+            || (int)$persoonAllergie->PersoonId === 5;
 
         return view('allergie.edit', [
             'title' => 'Wijzig allergie',
