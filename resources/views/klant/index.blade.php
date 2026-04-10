@@ -5,6 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overzicht Klanten - Voedselbank Maaskantje</title>
+    <style>
+        #postcodeSelect option:hover {
+            background-color: #0d6efd;
+            color: white;
+        }
+        #postcodeSelect option:checked {
+            background-color: #0d6efd;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <div class="container py-4">

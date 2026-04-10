@@ -9,7 +9,7 @@
 <body>
 <div class="container py-4">
     <div class="mb-4">
-        <h1 class="h2 mb-4" style="color: #3a7d3a; font-weight: 600; text-decoration: underline;">Wijzig Klant Details Arjan Bergkamp</h1>
+        <h1 class="h2 mb-4" style="color: #3a7d3a; font-weight: 600; text-decoration: underline;">Wijzig Klant Details {{ $klant->Voornaam }} {{ $klant->Tussenvoegsel }} {{ $klant->Achternaam }}</h1>
 
         @if(session('success'))
         <div class="alert alert-info alert-dismissible fade show" role="alert" style="background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb;">
