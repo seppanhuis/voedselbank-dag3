@@ -47,7 +47,7 @@
             </div>
 
             @if(session('validation_error'))
-                <div class="text-danger fs-2 mb-3">
+                <div class="text-danger fs-5 mb-3">
                     {{ session('validation_error') }}
                 </div>
             @endif
