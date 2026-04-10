@@ -10,7 +10,7 @@
 <div class="container py-4">
     <!-- Header met titel links en filter rechts -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h2 mb-0" style="color: #3a7d3a; font-weight: 600;">Overzicht Klanten</h1>
+        <h1 class="h2 mb-0" style="color: #3a7d3a; font-weight: 600; text-decoration: underline;">Overzicht Klanten</h1>
         
         <form method="GET" action="{{ route('klant.index') }}" class="d-flex gap-2">
             <div style="width: 250px;">

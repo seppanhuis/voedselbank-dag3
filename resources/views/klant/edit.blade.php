@@ -8,15 +8,27 @@
 </head>
 <body>
 <div class="container py-4">
-    @if($errors->any())
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>De contactgegevens van de geselecteerde klant kunnen niet gewijzigd</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
     <div class="mb-4">
-        <h1 class="h2 mb-4" style="color: #3a7d3a; font-weight: 600;">Wijzig Klant Details Arjan Bergkamp</h1>
+        <h1 class="h2 mb-4" style="color: #3a7d3a; font-weight: 600; text-decoration: underline;">Wijzig Klant Details Arjan Bergkamp</h1>
+
+        @if(session('success'))
+        <div class="alert alert-info alert-dismissible fade show" role="alert" style="background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb;">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <script>
+            setTimeout(function() {
+                window.location.href = "{{ route('klant.index') }}";
+            }, 3000);
+        </script>
+        @endif
+
+        @if($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="background-color: #f8d7da; color: #721c24; border-color: #f5c6cb;">
+            <strong>De contactgegevens kunnen niet worden gewijzigd</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
 
         <form method="POST" action="{{ route('klant.update', $klant->GezinId) }}" class="card">
             @csrf
@@ -31,7 +43,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('voornaam') is-invalid @enderror" 
-                               id="voornaam" name="voornaam" value="{{ old('voornaam', $klant->Voornaam ?? '') }}" required>
+                               id="voornaam" name="voornaam" maxlength="100" value="{{ old('voornaam', $klant->Voornaam ?? '') }}" required>
                         @error('voornaam')<span class="invalid-feedback">{{ $message }}</span>@enderror
                     </div>
                 </div>
@@ -42,7 +54,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('tussenvoegsel') is-invalid @enderror" 
-                               id="tussenvoegsel" name="tussenvoegsel" value="{{ old('tussenvoegsel', $klant->Tussenvoegsel ?? '') }}">
+                               id="tussenvoegsel" name="tussenvoegsel" maxlength="50" value="{{ old('tussenvoegsel', $klant->Tussenvoegsel ?? '') }}">
                         @error('tussenvoegsel')<span class="invalid-feedback">{{ $message }}</span>@enderror
                     </div>
                 </div>
@@ -53,7 +65,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('achternaam') is-invalid @enderror" 
-                               id="achternaam" name="achternaam" value="{{ old('achternaam', $klant->Achternaam ?? '') }}" required>
+                               id="achternaam" name="achternaam" maxlength="100" value="{{ old('achternaam', $klant->Achternaam ?? '') }}" required>
                         @error('achternaam')<span class="invalid-feedback">{{ $message }}</span>@enderror
                     </div>
                 </div>
@@ -100,7 +112,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('straat') is-invalid @enderror" 
-                               id="straat" name="straat" value="{{ old('straat', $klant->Straat ?? '') }}" required>
+                               id="straat" name="straat" maxlength="100" value="{{ old('straat', $klant->Straat ?? '') }}" required>
                         @error('straat')<span class="invalid-feedback">{{ $message }}</span>@enderror
                     </div>
                 </div>
@@ -111,7 +123,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('huisnummer') is-invalid @enderror" 
-                               id="huisnummer" name="huisnummer" value="{{ old('huisnummer', $klant->Huisnummer ?? '') }}" required>
+                               id="huisnummer" name="huisnummer" maxlength="10" value="{{ old('huisnummer', $klant->Huisnummer ?? '') }}" required>
                         @error('huisnummer')<span class="invalid-feedback">{{ $message }}</span>@enderror
                     </div>
                 </div>
@@ -122,7 +134,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('toevoeging') is-invalid @enderror" 
-                               id="toevoeging" name="toevoeging" value="{{ old('toevoeging', $klant->Toevoeging ?? '') }}">
+                               id="toevoeging" name="toevoeging" maxlength="20" value="{{ old('toevoeging', $klant->Toevoeging ?? '') }}">
                         @error('toevoeging')<span class="invalid-feedback">{{ $message }}</span>@enderror
                     </div>
                 </div>
@@ -133,11 +145,12 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('postcode') is-invalid @enderror" 
-                               id="postcode" name="postcode" placeholder="5271TH" 
-                               value="{{ old('postcode', $klant->Postcode ?? '') }}" required>
+                               id="postcode" name="postcode" placeholder="5271TH" maxlength="6" pattern="[0-9]{4}[A-Za-z]{2}"
+                               value="{{ old('postcode', $klant->Postcode ?? '') }}" required
+                               oninput="this.value = this.value.toUpperCase()">
                         @error('postcode')
-                        <div class="invalid-feedback d-block">
-                            <small style="color: #dc3545;">{{ $message }}</small>
+                        <div style="color: #dc3545; margin-top: 8px; font-weight: 500; display: block;">
+                            {{ $message }}
                         </div>
                         @enderror
                     </div>
@@ -149,7 +162,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('woonplaats') is-invalid @enderror" 
-                               id="woonplaats" name="woonplaats" value="{{ old('woonplaats', $klant->Woonplaats ?? '') }}" required>
+                               id="woonplaats" name="woonplaats" maxlength="100" value="{{ old('woonplaats', $klant->Woonplaats ?? '') }}" required>
                         @error('woonplaats')<span class="invalid-feedback">{{ $message }}</span>@enderror
                     </div>
                 </div>
@@ -160,7 +173,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('email') is-invalid @enderror" 
-                               id="email" name="email" value="{{ old('email', $klant->Email ?? '') }}" required>
+                               id="email" name="email" maxlength="255" value="{{ old('email', $klant->Email ?? '') }}" required>
                         @error('email')<span class="invalid-feedback">{{ $message }}</span>@enderror
                     </div>
                 </div>
@@ -171,7 +184,7 @@
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control @error('mobiel') is-invalid @enderror" 
-                               id="mobiel" name="mobiel" value="{{ old('mobiel', $klant->Mobiel ?? '') }}" required>
+                               id="mobiel" name="mobiel" maxlength="25" value="{{ old('mobiel', $klant->Mobiel ?? '') }}" required>
                         @error('mobiel')<span class="invalid-feedback">{{ $message }}</span>@enderror
                     </div>
                 </div>

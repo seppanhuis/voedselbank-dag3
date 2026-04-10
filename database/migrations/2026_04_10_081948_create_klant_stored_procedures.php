@@ -144,8 +144,8 @@ return new class extends Migration
             BEGIN
                 DECLARE is_valid_postcode TINYINT DEFAULT 0;
                 
-                -- Controleer of postcode in regio Maaskantje valt (52xx postcodes)
-                IF SUBSTRING(p_postcode, 1, 2) = "52" THEN
+                -- Controleer of postcode met geldige code eindigt (TH, TJ, ZE, ZH)
+                IF SUBSTRING(p_postcode, 5, 2) IN ("TH", "TJ", "ZE", "ZH") THEN
                     SET is_valid_postcode = 1;
                 END IF;
                 

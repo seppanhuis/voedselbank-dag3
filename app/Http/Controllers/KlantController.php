@@ -72,10 +72,14 @@ class KlantController extends Controller
             'straat' => 'required|string|max:100',
             'huisnummer' => 'required|string|max:10',
             'toevoeging' => 'nullable|string|max:20',
-            'postcode' => 'required|string|max:10|regex:/^[0-9]{4}[A-Z]{2}$/',
+            'postcode' => ['required', 'string', 'max:6', 'regex:/^[0-9]{4}(TH|TJ|ZE|ZH)$/i'],
             'woonplaats' => 'required|string|max:100',
             'email' => 'required|string|max:255',
             'mobiel' => 'required|string|max:25'
+        ], [
+            'postcode.regex' => 'Deze postcode komt niet uit de regio Maaskantje',
+            'postcode.max' => 'Postcode mag maximaal 6 karakters zijn',
+            'postcode.required' => 'Postcode is verplicht',
         ]);
 
         // Update personal details via stored procedure
@@ -106,7 +110,7 @@ class KlantController extends Controller
 
         if ($contactResult) {
             if ($contactResult->success == 1) {
-                return redirect()->route('klant.show', $id)
+                return redirect()->route('klant.edit', $id)
                     ->with('success', 'Alle gegevens zijn succesvol gewijzigd');
             } else {
                 return redirect()->route('klant.edit', $id)

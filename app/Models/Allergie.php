@@ -75,7 +75,7 @@ class Allergie
 
         return $rows[0] ?? null;
     }
-
+  
     public function updatePersoonAllergie(int $allergiePerPersoonId, int $nieuweAllergieId): int
     {
         $rows = DB::select('CALL sp_UpdatePersoonAllergie(?, ?)', [$allergiePerPersoonId, $nieuweAllergieId]);
