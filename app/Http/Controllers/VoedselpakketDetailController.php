@@ -25,7 +25,8 @@ class VoedselpakketDetailController extends Controller
             return redirect()->back()->with('error', 'Voedselpakket niet gevonden');
         }
 
-        $gezinIngeschreven = $pakket->IsIngeschreven ?? false;
+        // Extra check op hoofdlettergebruik property
+        $gezinIngeschreven = $pakket->IsIngeschreven ?? $pakket->isIngeschreven ?? false;
 
         // Toon unhappy scenario direct als gezin niet is ingeschreven
         if (!$gezinIngeschreven) {
