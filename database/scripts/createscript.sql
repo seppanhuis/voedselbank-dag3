@@ -587,3 +587,7 @@ INSERT INTO `ProductPerMagazijn` (`Id`, `ProductId`, `MagazijnId`, `Locatie`, `I
 (29, 29, 29, 'Vught', b'1', NULL, SYSDATE(6), SYSDATE(6));
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- Stored procedures staan nu in losse bestanden onder:
+-- database/scripts/allergeen
+-- Voer die bestanden apart uit na het draaien van dit createscript.
