@@ -17,3 +17,4 @@ Route::get('/voedselpakketten', [VoedselpakketController::class, 'index'])->name
 Route::get('/voedselpakketten/gezin/{gezinId}', [VoedselpakketDetailController::class, 'show'])->name('voedselpakket.details');
 Route::get('/voedselpakketten/pakket/{pakketId}/edit', [VoedselpakketDetailController::class, 'edit'])->name('voedselpakket.edit');
 Route::put('/voedselpakketten/pakket/{pakketId}', [VoedselpakketDetailController::class, 'update'])->name('voedselpakket.update');
+Route::get('/voedselpakketten/pakket/{pakketId}', [VoedselpakketDetailController::class, 'show'])->name('voedselpakket.show');

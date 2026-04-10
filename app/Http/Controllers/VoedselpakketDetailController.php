@@ -20,7 +20,11 @@ class VoedselpakketDetailController extends Controller
     {
         $pakket = Voedselpakket::getById($pakketId);
 
-        // Haal inschrijfstatus op uit pakket (moet uit SP komen!)
+        // ✅ NULL CHECK
+        if (!$pakket) {
+            return redirect()->back()->with('error', 'Voedselpakket niet gevonden');
+        }
+
         $gezinIngeschreven = $pakket->IsIngeschreven ?? false;
 
         return view('voedselpakket.edit', compact('pakket', 'gezinIngeschreven'));
@@ -33,6 +37,12 @@ class VoedselpakketDetailController extends Controller
         ]);
 
         $pakket = Voedselpakket::getById($pakketId);
+
+        // ✅ NULL CHECK (belangrijk!)
+        if (!$pakket) {
+            return redirect()->back()->with('error', 'Voedselpakket niet gevonden');
+        }
+
         $gezinId = $pakket->GezinId;
         $gezinIngeschreven = $pakket->IsIngeschreven ?? false;
 

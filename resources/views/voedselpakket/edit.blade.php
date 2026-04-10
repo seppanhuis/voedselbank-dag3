@@ -18,18 +18,23 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    <form method="POST" action="{{ route('voedselpakket.update', ['pakketId' => $pakket->id ?? 0]) }}">
+    <!-- ✅ FIX: juiste Id gebruiken + geen ?? 0 -->
+    <form method="POST" action="{{ route('voedselpakket.update', ['pakketId' => $pakket->Id]) }}">
         @csrf
         @method('PUT')
 
         <div class="mb-3">
             <select name="status" class="form-select" {{ !$gezinIngeschreven ? 'disabled' : '' }}>
-                <option value="Niet Uitgereikt" {{ ($pakket->status ?? '') == 'Niet Uitgereikt' ? 'selected' : '' }}>
+
+                <!-- ✅ FIX: Status met hoofdletter -->
+                <option value="Niet Uitgereikt" {{ ($pakket->Status ?? '') == 'Niet Uitgereikt' ? 'selected' : '' }}>
                     Niet Uitgereikt
                 </option>
-                <option value="Uitgereikt" {{ ($pakket->status ?? '') == 'Uitgereikt' ? 'selected' : '' }}>
+
+                <option value="Uitgereikt" {{ ($pakket->Status ?? '') == 'Uitgereikt' ? 'selected' : '' }}>
                     Uitgereikt
                 </option>
+
             </select>
         </div>
 
@@ -50,10 +55,11 @@
     </div>
 </div>
 
+<!-- ✅ FIX: geen hardcoded gezinId -->
 @if(session('success'))
 <script>
     setTimeout(function(){
-        window.location.href = "{{ route('voedselpakket.details', ['gezinId' => 1]) }}";
+        window.location.href = "{{ route('voedselpakket.details', ['gezinId' => $pakket->GezinId]) }}";
     }, 3000);
 </script>
 @endif
