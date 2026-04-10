@@ -8,30 +8,27 @@
 </head>
 <body class="bg-light">
 <div class="container mt-5 mb-5">
-    <div class="row mb-4">
-        <div class="col-12">
+    <div class="row mb-4 align-items-center">
+        <div class="col-8">
             <h2 class="fw-normal" style="color: #228B22;">
                 Overzicht gezinnen met voedselpakketten
             </h2>
         </div>
-    </div>
-
-    <form method="GET" action="{{ route('voedselpakket.index') }}" class="mb-3">
-        <div class="row align-items-center">
-            <div class="col-md-3 col-12 mb-2 mb-md-0">
-                <select name="eetwens" class="form-select">
-                    <option value="" {{ empty($eetwens) ? 'selected' : '' }}>Selecteer Eetwens</option>
-                    <option value="Omnivoor" {{ $eetwens == 'Omnivoor' ? 'selected' : '' }}>Omnivoor</option>
-                    <option value="Vegetarisch" {{ $eetwens == 'Vegetarisch' ? 'selected' : '' }}>Vegetarisch</option>
-                    <option value="Veganistisch" {{ $eetwens == 'Veganistisch' ? 'selected' : '' }}>Veganistisch</option>
-                    <option value="GeenVarken" {{ $eetwens == 'GeenVarken' ? 'selected' : '' }}>GeenVarken</option>
-                </select>
-            </div>
-            <div class="col-md-2 col-12">
-                <button type="submit" class="btn btn-secondary w-100">Toon Gezinnen</button>
-            </div>
+        <div class="col-4 text-end">
+            <form method="GET" action="{{ route('voedselpakket.index') }}" class="d-inline-block">
+                <div class="input-group">
+                    <select name="eetwens" class="form-select">
+                        <option value="" {{ empty($eetwens) ? 'selected' : '' }}>Selecteer Eetwens</option>
+                        <option value="Omnivoor" {{ $eetwens == 'Omnivoor' ? 'selected' : '' }}>Omnivoor</option>
+                        <option value="Vegetarisch" {{ $eetwens == 'Vegetarisch' ? 'selected' : '' }}>Vegetarisch</option>
+                        <option value="Veganistisch" {{ $eetwens == 'Veganistisch' ? 'selected' : '' }}>Veganistisch</option>
+                        <option value="GeenVarken" {{ $eetwens == 'GeenVarken' ? 'selected' : '' }}>GeenVarken</option>
+                    </select>
+                    <button type="submit" class="btn btn-secondary">Toon Gezinnen</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-bordered align-middle mb-0">

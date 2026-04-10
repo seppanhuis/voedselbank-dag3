@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AllergieController;
 use App\Http\Controllers\KlantController;
+use App\Http\Controllers\VoedselpakketController;
+use App\Http\Controllers\VoedselpakketDetailController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,3 +19,9 @@ Route::get('/klanten', [KlantController::class, 'index'])->name('klant.index');
 Route::get('/klanten/{id}', [KlantController::class, 'show'])->name('klant.show');
 Route::get('/klanten/{id}/wijzig', [KlantController::class, 'edit'])->name('klant.edit');
 Route::put('/klanten/{id}', [KlantController::class, 'update'])->name('klant.update');
+
+Route::get('/voedselpakketten', [VoedselpakketController::class, 'index'])->name('voedselpakket.index');
+Route::get('/voedselpakketten/gezin/{gezinId}', [VoedselpakketDetailController::class, 'show'])->name('voedselpakket.details');
+Route::get('/voedselpakketten/pakket/{pakketId}/edit', [VoedselpakketDetailController::class, 'edit'])->name('voedselpakket.edit');
+Route::put('/voedselpakketten/pakket/{pakketId}', [VoedselpakketDetailController::class, 'update'])->name('voedselpakket.update');
+Route::get('/voedselpakketten/pakket/{pakketId}', [VoedselpakketDetailController::class, 'show'])->name('voedselpakket.show');
