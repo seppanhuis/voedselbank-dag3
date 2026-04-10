@@ -27,6 +27,11 @@ class VoedselpakketDetailController extends Controller
 
         $gezinIngeschreven = $pakket->IsIngeschreven ?? false;
 
+        // Toon unhappy scenario direct als gezin niet is ingeschreven
+        if (!$gezinIngeschreven) {
+            return redirect()->back()->with('error', 'Dit gezin is niet meer ingeschreven bij de voedselbank en daarom kan er geen voedselpakket worden uitgereikt');
+        }
+
         return view('voedselpakket.edit', compact('pakket', 'gezinIngeschreven'));
     }
 
