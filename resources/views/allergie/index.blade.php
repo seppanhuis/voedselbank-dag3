@@ -34,7 +34,7 @@
 				<button type="submit" class="btn btn-secondary w-100">Toon Gezinnen</button>
 			</div>
 		</form>
-
+ 
 		@if(!empty($showNoDataWarning))
 			<div class="alert alert-warning text-center">
 				Er zijn geen gezinnen bekent die de geselecteerde allergie hebben
