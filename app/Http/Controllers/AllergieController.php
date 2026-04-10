@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Throwable;
-
+ 
 class AllergieController extends Controller
 {
     private Allergie $allergieModel;
