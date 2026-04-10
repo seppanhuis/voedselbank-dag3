@@ -9,6 +9,12 @@
 <body class="bg-light">
 <div class="container mt-5 mb-5">
     <h2 class="fw-normal mb-4" style="color: #228B22;">Overzicht Voedselpakketten</h2>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
     <table class="table w-auto mb-4">
         <tr><th>Naam:</th><td>{{ $gezin->Naam ?? '' }}</td></tr>
         <tr><th>Omschrijving:</th><td>{{ $gezin->Omschrijving ?? '' }}</td></tr>
