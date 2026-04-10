@@ -18,6 +18,10 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
+    @if(isset($error) && $error)
+        <div class="alert alert-danger">{{ $error }}</div>
+    @endif
+
     <!-- ✅ FIX: juiste Id gebruiken + geen ?? 0 -->
     <form method="POST" action="{{ route('voedselpakket.update', ['pakketId' => $pakket->Id]) }}">
         @csrf

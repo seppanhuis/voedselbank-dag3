@@ -22,23 +22,26 @@ class VoedselpakketDetailController extends Controller
 
         // ✅ NULL CHECK
         if (!$pakket) {
-            return redirect()->back()->with('error', 'Voedselpakket niet gevonden');
+            return view('voedselpakket.edit', [
+                'pakket' => null,
+                'gezinIngeschreven' => false,
+                'error' => 'Voedselpakket niet gevonden'
+            ]);
         }
 
-        // Extra check op hoofdlettergebruik property
         $gezinIngeschreven = $pakket->IsIngeschreven ?? $pakket->isIngeschreven ?? false;
+        $error = null;
 
-        // Als de status al op 'NietMeerIngeschreven' staat, direct unhappy tonen
+        // Als de status al op 'NietMeerIngeschreven' staat, toon unhappy scenario op de edit pagina
         if (($pakket->Status ?? $pakket->status ?? '') === 'NietMeerIngeschreven') {
-            return redirect()->back()->with('error', 'De status van dit voedselpakket kan niet meer worden bewerkt omdat het gezin niet meer is ingeschreven bij de voedselbank.');
+            $error = 'De status van dit voedselpakket kan niet meer worden bewerkt omdat het gezin niet meer is ingeschreven bij de voedselbank.';
         }
-
         // Toon unhappy scenario direct als gezin niet is ingeschreven
-        if (!$gezinIngeschreven) {
-            return redirect()->back()->with('error', 'Dit gezin is niet meer ingeschreven bij de voedselbank en daarom kan er geen voedselpakket worden uitgereikt');
+        elseif (!$gezinIngeschreven) {
+            $error = 'Dit gezin is niet meer ingeschreven bij de voedselbank en daarom kan er geen voedselpakket worden uitgereikt';
         }
 
-        return view('voedselpakket.edit', compact('pakket', 'gezinIngeschreven'));
+        return view('voedselpakket.edit', compact('pakket', 'gezinIngeschreven', 'error'));
     }
 
     public function update(Request $request, $pakketId)
