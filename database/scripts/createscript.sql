@@ -587,3 +587,122 @@ INSERT INTO `ProductPerMagazijn` (`Id`, `ProductId`, `MagazijnId`, `Locatie`, `I
 (29, 29, 29, 'Vught', b'1', NULL, SYSDATE(6), SYSDATE(6));
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+DROP PROCEDURE IF EXISTS sp_GetAllAllergieen;
+DROP PROCEDURE IF EXISTS sp_GetGezinnenMetAllergie;
+DROP PROCEDURE IF EXISTS sp_GetAllergieDetailsPerGezin;
+DROP PROCEDURE IF EXISTS sp_GetGezinById;
+DROP PROCEDURE IF EXISTS sp_GetPersoonAllergieData;
+DROP PROCEDURE IF EXISTS sp_UpdatePersoonAllergie;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_GetAllAllergieen()
+BEGIN
+	SELECT
+		a.Id,
+		a.Naam,
+		a.AnafylactischRisico
+	FROM Allergie a
+	WHERE a.IsActief = 1
+	ORDER BY a.Naam ASC;
+END$$
+
+CREATE PROCEDURE sp_GetGezinnenMetAllergie(IN p_allergieId INT)
+BEGIN
+	SELECT
+		g.Id AS GezinId,
+		g.Naam,
+		g.Omschrijving,
+		g.AantalVolwassenen,
+		g.AantalKinderen,
+		g.AantalBabys,
+		TRIM(CONCAT(v.Voornaam, ' ', COALESCE(v.Tussenvoegsel, ''), ' ', v.Achternaam)) AS Vertegenwoordiger
+	FROM Gezin g
+	INNER JOIN Persoon p ON p.GezinId = g.Id
+	INNER JOIN AllergiePerPersoon ap ON ap.PersoonId = p.Id
+	INNER JOIN Allergie a ON a.Id = ap.AllergieId
+	LEFT JOIN Persoon v ON v.GezinId = g.Id AND v.IsVertegenwoordiger = 1
+	WHERE g.IsActief = 1
+	  AND ap.IsActief = 1
+	  AND (p_allergieId IS NULL OR a.Id = p_allergieId)
+	GROUP BY
+		g.Id,
+		g.Naam,
+		g.Omschrijving,
+		g.AantalVolwassenen,
+		g.AantalKinderen,
+		g.AantalBabys,
+		v.Voornaam,
+		v.Tussenvoegsel,
+		v.Achternaam
+	ORDER BY g.Naam ASC;
+END$$
+
+CREATE PROCEDURE sp_GetAllergieDetailsPerGezin(IN p_gezinId INT)
+BEGIN
+	SELECT
+		p.Id AS PersoonId,
+		ap.Id AS AllergiePerPersoonId,
+		g.Id AS GezinId,
+		TRIM(CONCAT(p.Voornaam, ' ', COALESCE(p.Tussenvoegsel, ''), ' ', p.Achternaam)) AS Naam,
+		p.TypePersoon,
+		CASE
+			WHEN p.IsVertegenwoordiger = 1 THEN 'Vertegenwoordiger'
+			ELSE 'Gezinslid'
+		END AS Gezinsrol,
+		a.Id AS AllergieId,
+		a.Naam AS AllergieNaam,
+		a.AnafylactischRisico
+	FROM Gezin g
+	INNER JOIN Persoon p ON p.GezinId = g.Id
+	INNER JOIN AllergiePerPersoon ap ON ap.PersoonId = p.Id
+	INNER JOIN Allergie a ON a.Id = ap.AllergieId
+	WHERE g.Id = p_gezinId
+	  AND ap.IsActief = 1
+	ORDER BY p.Id ASC;
+END$$
+
+CREATE PROCEDURE sp_GetGezinById(IN p_gezinId INT)
+BEGIN
+	SELECT
+		g.Id,
+		g.Naam,
+		g.Omschrijving,
+		g.TotaalAantalPersonen
+	FROM Gezin g
+	WHERE g.Id = p_gezinId;
+END$$
+
+CREATE PROCEDURE sp_GetPersoonAllergieData(IN p_persoonId INT)
+BEGIN
+	SELECT
+		p.Id AS PersoonId,
+		p.GezinId,
+		ap.Id AS AllergiePerPersoonId,
+		a.Id AS AllergieId,
+		a.Naam AS AllergieNaam,
+		a.AnafylactischRisico
+	FROM Persoon p
+	INNER JOIN AllergiePerPersoon ap ON ap.PersoonId = p.Id
+	INNER JOIN Allergie a ON a.Id = ap.AllergieId
+	WHERE p.Id = p_persoonId
+	  AND ap.IsActief = 1
+	ORDER BY ap.Id ASC
+	LIMIT 1;
+END$$
+
+CREATE PROCEDURE sp_UpdatePersoonAllergie(
+	IN p_allergiePerPersoonId INT,
+	IN p_nieuweAllergieId INT
+)
+BEGIN
+	UPDATE AllergiePerPersoon
+	SET AllergieId = p_nieuweAllergieId,
+		DatumGewijzigd = SYSDATE(6)
+	WHERE Id = p_allergiePerPersoonId;
+
+	SELECT ROW_COUNT() AS affected;
+END$$
+
+DELIMITER ;
