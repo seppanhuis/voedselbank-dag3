@@ -35,6 +35,10 @@
                     Uitgereikt
                 </option>
 
+                <option value="NietMeerIngeschreven" {{ ($pakket->Status ?? '') == 'NietMeerIngeschreven' ? 'selected' : '' }}>
+                    Gezin niet meer ingeschreven bij de voedselbank
+                </option>
+
             </select>
         </div>
 

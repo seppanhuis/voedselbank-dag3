@@ -39,7 +39,7 @@ class VoedselpakketDetailController extends Controller
     public function update(Request $request, $pakketId)
     {
         $request->validate([
-            'status' => 'required|in:Niet Uitgereikt,Uitgereikt'
+            'status' => 'required|in:Niet Uitgereikt,Uitgereikt,NietMeerIngeschreven'
         ]);
 
         $pakket = Voedselpakket::getById($pakketId);
@@ -50,7 +50,15 @@ class VoedselpakketDetailController extends Controller
         }
 
         $gezinId = $pakket->GezinId;
-        $gezinIngeschreven = $pakket->IsIngeschreven ?? false;
+        $gezinIngeschreven = $pakket->IsIngeschreven ?? $pakket->isIngeschreven ?? false;
+
+        // Als gekozen is voor "NietMeerIngeschreven", status direct updaten
+        if ($request->status === 'NietMeerIngeschreven') {
+            Voedselpakket::updateStatus($pakketId, $request->status);
+            return redirect()
+                ->route('voedselpakket.details', ['gezinId' => $gezinId])
+                ->with('success', 'De status is gewijzigd naar: Gezin niet meer ingeschreven bij de voedselbank');
+        }
 
         if ($gezinIngeschreven) {
             Voedselpakket::updateStatus($pakketId, $request->status);
