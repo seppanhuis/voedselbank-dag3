@@ -17,6 +17,12 @@
             <li class="mb-2">
                 <a href="{{ route('allergie.index') }}">Overzicht gezinsallergiën</a>
             </li>
+            <li class="mb-2">
+                <a href="{{ route('voedselpakket.index') }}">Overzicht Voedselpakketten</a>
+            </li>
+            <li class="mb-2">
+                <a href="{{ route('leverancier.index') }}">Overzicht Leveranciers</a>
+            </li>
         </ul>
     </div>
 </div>
