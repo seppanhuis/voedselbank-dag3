@@ -65,7 +65,7 @@
         </table>
     </div>
 
-    <div class="mt-4">
+    <div class="mt-4 d-flex justify-content-end">
         <a href="{{ route('home') }}" class="btn btn-primary">home</a>
     </div>
 </div>
