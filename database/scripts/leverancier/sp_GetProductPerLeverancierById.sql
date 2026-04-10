@@ -10,6 +10,7 @@ BEGIN
         l.Naam AS LeverancierNaam,
         p.Id AS ProductId,
         p.Naam AS ProductNaam,
+        p.SoortAllergie,
         p.Houdbaarheidsdatum
     FROM ProductPerLeverancier AS ppl
     INNER JOIN Product AS p

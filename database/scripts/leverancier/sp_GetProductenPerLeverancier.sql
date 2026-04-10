@@ -8,6 +8,7 @@ BEGIN
         ppl.Id AS ProductPerLeverancierId,
         p.Id AS ProductId,
         p.Naam,
+        p.SoortAllergie,
         p.Barcode,
         p.Houdbaarheidsdatum,
         p.Status

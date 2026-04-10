@@ -95,6 +95,7 @@ class Leverancier
                     'ppl.Id as ProductPerLeverancierId',
                     'p.Id as ProductId',
                     'p.Naam',
+                    'p.SoortAllergie',
                     'p.Barcode',
                     'p.Houdbaarheidsdatum',
                     'p.Status'
@@ -131,6 +132,7 @@ class Leverancier
                     'l.Naam as LeverancierNaam',
                     'p.Id as ProductId',
                     'p.Naam as ProductNaam',
+                    'p.SoortAllergie',
                     'p.Houdbaarheidsdatum'
                 )
                 ->where('ppl.Id', '=', $productPerLeverancierId)

@@ -40,12 +40,27 @@
 
         <div class="table-responsive mb-3">
             <table class="table table-bordered table-sm align-middle">
+                @php
+                    $sortBy = $sortBy ?? 'naam';
+                    $sortDirection = $sortDirection ?? 'asc';
+                    $nextDirection = static function (string $column) use ($sortBy, $sortDirection): string {
+                        return ($sortBy === $column && $sortDirection === 'asc') ? 'desc' : 'asc';
+                    };
+                @endphp
                 <thead class="table-light">
                 <tr>
-                    <th>Naam</th>
-                    <th>Barcode</th>
-                    <th>Houdbaarheidsdatum</th>
-                    <th>Status</th>
+                    <th>
+                        <a href="{{ route('leverancier.producten', ['leverancierId' => $leverancier->Id, 'sort' => 'naam', 'direction' => $nextDirection('naam')]) }}">Naam</a>
+                    </th>
+                    <th>
+                        <a href="{{ route('leverancier.producten', ['leverancierId' => $leverancier->Id, 'sort' => 'soort_allergie', 'direction' => $nextDirection('soort_allergie')]) }}">Soort Allergie</a>
+                    </th>
+                    <th>
+                        <a href="{{ route('leverancier.producten', ['leverancierId' => $leverancier->Id, 'sort' => 'barcode', 'direction' => $nextDirection('barcode')]) }}">Barcode</a>
+                    </th>
+                    <th>
+                        <a href="{{ route('leverancier.producten', ['leverancierId' => $leverancier->Id, 'sort' => 'houdbaarheidsdatum', 'direction' => $nextDirection('houdbaarheidsdatum')]) }}">Houdbaarheidsdatum</a>
+                    </th>
                     <th class="text-center">Wijzig Product</th>
                 </tr>
                 </thead>
@@ -53,9 +68,9 @@
                 @forelse($producten as $product)
                     <tr>
                         <td>{{ $product->Naam }}</td>
+                        <td>{{ $product->SoortAllergie ?? '-' }}</td>
                         <td>{{ $product->Barcode }}</td>
                         <td>{{ \Carbon\Carbon::parse($product->Houdbaarheidsdatum)->format('d-m-Y') }}</td>
-                        <td>{{ $product->Status }}</td>
                         <td class="text-center">
                             <a class="icon-link" href="{{ route('leverancier.product.edit', ['productPerLeverancierId' => $product->ProductPerLeverancierId]) }}" title="Wijzig product">&#9998;</a>
                         </td>

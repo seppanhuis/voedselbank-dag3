@@ -61,6 +61,13 @@ class LeverancierController extends Controller
 
     public function showProducten(int $leverancierId): View|RedirectResponse
     {
+        $allowedSortFields = ['naam', 'soort_allergie', 'barcode', 'houdbaarheidsdatum'];
+        $sortBy = strtolower((string) request()->query('sort', 'naam'));
+        $sortDirection = strtolower((string) request()->query('direction', 'asc')) === 'desc' ? 'desc' : 'asc';
+        if (!in_array($sortBy, $allowedSortFields, true)) {
+            $sortBy = 'naam';
+        }
+
         try {
             // Haal leverancier en gekoppelde producten op.
             $leverancier = $this->leverancierModel->getLeverancierById($leverancierId);
@@ -82,10 +89,45 @@ class LeverancierController extends Controller
                 ->with('error', 'De geselecteerde leverancier bestaat niet.');
         }
 
+        usort($producten, function (object $a, object $b) use ($sortBy, $sortDirection): int {
+            $valueA = '';
+            $valueB = '';
+
+            switch ($sortBy) {
+                case 'soort_allergie':
+                    $valueA = strtolower((string)($a->SoortAllergie ?? ''));
+                    $valueB = strtolower((string)($b->SoortAllergie ?? ''));
+                    break;
+                case 'barcode':
+                    $valueA = strtolower((string)($a->Barcode ?? ''));
+                    $valueB = strtolower((string)($b->Barcode ?? ''));
+                    break;
+                case 'houdbaarheidsdatum':
+                    $valueA = (string)strtotime((string)($a->Houdbaarheidsdatum ?? ''));
+                    $valueB = (string)strtotime((string)($b->Houdbaarheidsdatum ?? ''));
+                    break;
+                case 'naam':
+                default:
+                    $valueA = strtolower((string)($a->Naam ?? ''));
+                    $valueB = strtolower((string)($b->Naam ?? ''));
+                    break;
+            }
+
+            if ($valueA === $valueB) {
+                return 0;
+            }
+
+            $result = $valueA <=> $valueB;
+
+            return $sortDirection === 'desc' ? -$result : $result;
+        });
+
         return view('leverancier.producten', [
             'title' => 'Overzicht producten',
             'leverancier' => $leverancier,
             'producten' => $producten,
+            'sortBy' => $sortBy,
+            'sortDirection' => $sortDirection,
         ]);
     }
 
