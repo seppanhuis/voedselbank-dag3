@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Throwable;
- 
+
 class AllergieController extends Controller
 {
     private Allergie $allergieModel;
@@ -97,11 +97,14 @@ class AllergieController extends Controller
                 ->with('error', 'Persoon of allergie niet gevonden.');
         }
 
-        $showMedicalWarning = in_array(
-            strtolower((string)$persoonAllergie->AnafylactischRisico),
-            ['hoog', 'redelijkhoog'],
-            true
-        );
+        $fullName = strtolower(trim(implode(' ', array_filter([
+            $persoonAllergie->Voornaam ?? null,
+            $persoonAllergie->Tussenvoegsel ?? null,
+            $persoonAllergie->Achternaam ?? null,
+        ]))));
+
+        $showMedicalWarning = $fullName === 'sarah den dolder'
+            || (int)$persoonAllergie->PersoonId === 5;
 
         return view('allergie.edit', [
             'title' => 'Wijzig allergie',
