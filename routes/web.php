@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/leveranciers', [LeverancierController::class, 'index'])->name('leverancier.index');
 Route::get('/leveranciers/{leverancierId}/producten', [LeverancierController::class, 'showProducten'])
