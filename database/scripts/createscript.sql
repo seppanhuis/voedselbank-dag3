@@ -427,30 +427,30 @@ INSERT INTO `Product` (`Id`, `CategorieId`, `Naam`, `SoortAllergie`, `Barcode`, 
 (3, 1, 'Ui', NULL, '8719437321335', '2026-05-02', 'Gele ui', 'NietOpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (4, 1, 'Appel', NULL, '8719486321332', '2026-05-16', 'Granny Smith', 'NietLeverbaar', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (5, 1, 'Appel', NULL, '8719486321332', '2026-05-23', 'Granny Smith', 'NietLeverbaar', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(6, 1, 'Banaan', 'Banaan', '8719484321336', '2026-05-12', 'Biologische Banaan', 'OverHoudbaarheidsDatum', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(7, 1, 'Banaan', 'Banaan', '8719484321336', '2026-05-19', 'Biologische Banaan', 'OverHoudbaarheidsDatum', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(6, 1, 'Banaan', NULL, '8719484321336', '2026-05-12', 'Biologische Banaan', 'OverHoudbaarheidsDatum', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(7, 1, '+', NULL, '8719484321336', '2026-05-19', 'Biologische Banaan', 'OverHoudbaarheidsDatum', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (8, 2, 'Kaas', 'Lactose', '8719487421338', '2026-05-19', 'Jonge Kaas', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (9, 2, 'Rosbief', NULL, '8719487421331', '2026-05-23', 'Rundvlees', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(10, 3, 'Melk', 'Lactose', '8719447321332', '2026-05-23', 'Halfvolle melk', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(10, 3, 'Melk', NULL, '8719447321332', '2026-05-23', 'Halfvolle melk', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (11, 3, 'Margarine', NULL, '8719486321336', '2026-05-02', 'Plantaardige boter', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(12, 3, 'Ei', 'Eier', '8719487421334', '2026-05-04', 'Scharrelei', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(12, 3, 'Ei', NULL, '8719487421334', '2026-05-04', 'Scharrelei', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (13, 4, 'Brood', 'Gluten', '8719487721337', '2026-05-07', 'Volkoren brood', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(14, 4, 'Gevulde Koek', 'Amande', '8719483321333', '2026-05-04', 'Banketbakkers kwaliteit', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(15, 5, 'Fristi', 'Lactose', '8719487121331', '2026-05-28', 'Frisdrank', 'NietOpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(14, 4, 'Gevulde Koek', 'Hazelnoten', '8719483321333', '2026-05-04', 'Banketbakkers kwaliteit', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(15, 5, 'Fristi', NULL, '8719487121331', '2026-05-28', 'Frisdrank', 'NietOpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (16, 5, 'Appelsap', NULL, '8719487521335', '2026-05-19', '100% vruchtensap', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(17, 5, 'Koffie', 'Caffeïne', '8719487381338', '2026-05-23', 'Arabica koffie', 'OverHoudbaarheidsDatum', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(18, 5, 'Thee', 'Theïne', '8719487329339', '2026-05-02', 'Ceylon thee', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(19, 6, 'Pasta', 'Gluten', '8719487321334', '2026-05-16', 'Macaroni', 'NietLeverbaar', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(17, 5, 'Koffie', NULL, '8719487381338', '2026-05-23', 'Arabica koffie', 'OverHoudbaarheidsDatum', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(18, 5, 'Thee', NULL, '8719487329339', '2026-05-02', 'Ceylon thee', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(19, 6, 'Pasta', NULL, '8719487321334', '2026-05-16', 'Macaroni', 'NietLeverbaar', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (20, 6, 'Rijst', NULL, '8719487331332', '2026-05-25', 'Basmati Rijst', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(21, 6, 'Knorr Nasi MiX', NULL, '871948735135', '2026-05-13', 'Nasi kruiden', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(21, 6, 'Knorr Nasi MiX', 'Schaaldieren', '871948735135', '2026-05-13', 'Nasi kruiden', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (22, 7, 'Tomatensoep', NULL, '8719487371337', '2026-05-23', 'Romige tomatensoep', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (23, 7, 'Tomatensaus', NULL, '8719487341334', '2026-05-21', 'Pizza saus', 'NietOpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(24, 7, 'Peterselie', NULL, '8719487321636', '2026-05-31', 'Verse kruidenpot', 'OpVoorraaad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(24, 7, 'Peterselie', NULL, '8719487321636', '2026-05-31', 'Verse kruidenpot', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (25, 8, 'Olie', NULL, '8719487327337', '2026-05-27', 'Olijfolie', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(26, 8, 'Mars', NULL, '8719487324334', '2026-05-11', 'Snoep', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
+(26, 8, 'Mars', 'Pindas', '8719487324334', '2026-05-11', 'Snoep', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (27, 8, 'Biscuit', NULL, '8719487311331', '2026-05-07', 'San Francisco biscuit', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
 (28, 8, 'Paprika Chips', NULL, '87194873218398', '2026-05-22', 'Ribbelchips paprika', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6)),
-(29, 8, 'Chocolade reep', 'Cacao', '8719487321533', '2026-05-21', 'Tony Chocolonely', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6));
+(29, 8, 'Chocolade reep', 'Soja', '8719487321533', '2026-05-21', 'Tony Chocolonely', 'OpVoorraad', b'1', NULL, SYSDATE(6), SYSDATE(6));
 
 INSERT INTO `Voedselpakket` (`Id`, `GezinId`, `PakketNummer`, `DatumSamenstelling`, `DatumUitgifte`, `Status`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`) VALUES
 (1, 1, 1, '2026-03-21', '2026-03-21', 'Uitgereikt', b'1', NULL, SYSDATE(6), SYSDATE(6)),
@@ -589,5 +589,4 @@ INSERT INTO `ProductPerMagazijn` (`Id`, `ProductId`, `MagazijnId`, `Locatie`, `I
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- Stored procedures staan nu in losse bestanden onder:
--- database/scripts/allergeen
--- Voer die bestanden apart uit na het draaien van dit createscript.
+
